@@ -40,6 +40,7 @@ export class AnyExceptionFilter implements ExceptionFilter {
     response.status(status).json({
       statusCode: status,
       timestamp: new Date().toISOString(),
+      code: status,
       path: request.url,
       success: false,
       message: exception.message,

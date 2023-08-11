@@ -15,6 +15,7 @@ import { requestAxiosHeaders } from 'src/config/request-headers';
 import { NetWork } from 'src/entities/network';
 import { createFolder, deleteFile, fileExist } from 'src/utils/file-tool';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+import { chromium } from 'playwright';
 
 @Injectable()
 export class LinkService {
@@ -121,7 +122,7 @@ export class LinkService {
     if (exist) {
       await deleteFile(outputPath);
     }
-    workbook.xlsx
+    await workbook.xlsx
       .writeFile(outputPath)
       .then(() => {
         console.log(`Excel file saved to "${outputPath}" successfully.`);
@@ -129,5 +130,27 @@ export class LinkService {
       .catch((err) => {
         console.error('Error saving Excel file:', err);
       });
+  }
+  // 获取股价
+  async fetchStockValue(stock: string) {
+    const browser = await chromium.launch({ headless: true });
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    try {
+      await page.goto(`https://quote.eastmoney.com/${stock}.html`, {
+        waitUntil: 'domcontentloaded',
+      });
+      const selector =
+        '.quote_quotenums > .zxj > span:nth-child(1) > span:nth-child(1)';
+      await page.waitForSelector(selector);
+      const text = await page.$eval(selector, (span) => span.textContent);
+      return text;
+    } catch (error) {
+      throw error;
+    } finally {
+      await page.close();
+      await context.close();
+      await browser.close();
+    }
   }
 }
