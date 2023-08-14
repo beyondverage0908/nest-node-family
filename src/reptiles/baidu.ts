@@ -10,9 +10,10 @@ export default class Baidu {
 
     await page.goto('https://www.baidu.com', { waitUntil: 'domcontentloaded' });
     const btnText = await page.$eval('#index-bn', (btn) => btn.textContent);
-    console.log(btnText);
+    console.log('12345', btnText);
 
     await page.close();
+    await context.close();
     await browser.close();
   }
 }
