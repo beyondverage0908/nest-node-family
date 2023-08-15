@@ -7,16 +7,19 @@ import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { AnyExceptionFilter } from './filters/any-exception.filter';
 import { LinkController } from './controllers/link/link.controller';
 import { LinkService } from './services/link/link.service';
+import { StockController } from './controllers/stock/stock.controller';
+import { StockService } from './services/stock/stock.service';
 import WinstonDailyLogConfig from './config/daily-log';
 
 @Module({
   imports: [WinstonDailyLogConfig],
-  controllers: [AppController, LinkController],
+  controllers: [AppController, LinkController, StockController],
   providers: [
     AppService,
     { provide: APP_FILTER, useClass: HttpExceptionFilter },
     { provide: APP_FILTER, useClass: AnyExceptionFilter },
     LinkService,
+    StockService,
   ],
 })
 export class AppModule implements NestModule {
