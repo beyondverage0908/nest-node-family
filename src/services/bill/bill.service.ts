@@ -6,6 +6,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as dayjs from 'dayjs';
 import * as archiver from 'archiver';
+import { rimraf } from 'rimraf';
 
 @Injectable()
 export class BillService {
@@ -33,17 +34,24 @@ export class BillService {
         index % 2 === 1
           ? generateShopUrl({ shopTime: date })
           : generateWechatUrl({ shopTime: date });
-      await page.goto(url, { waitUntil: 'load' });
+      await page.goto(url, { waitUntil: 'networkidle' });
       await page.screenshot({
-        path: `${path.resolve(dir, dayjs(date).format('YYYY-MM-DD') + '.png')}`,
+        path: `${path.resolve(
+          dir,
+          dayjs(date).format('YYYY-MM-DD') + '.jpeg',
+        )}`,
         fullPage: true,
+        type: 'png',
       });
+      await page.waitForTimeout(10);
     }
     await page.close();
     await context.close();
     await browser.close();
     this.logger.log('小票生成完成');
     const zip = this.createZipArchive();
+    const imagesFolderPath = path.join(process.cwd(), 'static/tickets');
+    this.removeDir(imagesFolderPath);
     return zip;
   }
 
@@ -58,5 +66,10 @@ export class BillService {
     });
     await archive.finalize();
     return archive;
+  }
+
+  async removeDir(dirPath: string) {
+    const isSuccess = await rimraf(dirPath, { maxRetries: 5 });
+    return isSuccess;
   }
 }
