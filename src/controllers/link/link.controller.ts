@@ -1,9 +1,9 @@
 import { Controller, Get, HttpStatus, Query } from '@nestjs/common';
-import { HttpResult } from 'src';
-import { NetWork } from 'src/entities/network';
-import { LinkService } from 'src/services/link/link.service';
+import { HttpResult } from '../../../src';
+import { NetWork } from '../../entities/network';
+import { LinkService } from '../../services/link/link.service';
 
-@Controller('/api/link')
+@Controller('/nest/api/link')
 export class LinkController {
   constructor(private readonly linkService: LinkService) {}
   @Get()

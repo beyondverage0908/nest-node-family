@@ -4,8 +4,8 @@ import {
   SH_SZ_LASTDAY_TRUNOVER_URL,
   SH_SZ_REALTIME_TRUNOVER_URL,
   SH_SZ_STOCK_VALUE_URL,
-} from 'src/config/thirdparty-service';
-import SecurityTool from 'src/utils/security-tool';
+} from '../../config/thirdparty-service';
+import SecurityTool from '../../utils/security-tool';
 
 interface DayTurnoverResult {
   version: string;

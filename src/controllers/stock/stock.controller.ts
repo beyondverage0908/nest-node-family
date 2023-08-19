@@ -1,8 +1,8 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { HttpResult } from 'src';
-import { StockService } from 'src/services/stock/stock.service';
+import { HttpResult } from '../../../src';
+import { StockService } from '../../services/stock/stock.service';
 
-@Controller('/api/stock')
+@Controller('/nest/api/stock')
 export class StockController {
   constructor(private readonly stockService: StockService) {}
   @Get('today')

@@ -5,15 +5,15 @@ import axios from 'axios';
 import * as https from 'https';
 import * as ExcelJS from 'exceljs';
 import * as path from 'path';
-import { CheerioTool } from 'src/tools/cheerio-tool';
+import { CheerioTool } from '../../tools/cheerio-tool';
 import {
   getOriginFromUrl,
   getTopDomainFromUrl,
   removeAllSpace,
-} from 'src/tools/tool';
-import { requestAxiosHeaders } from 'src/config/request-headers';
-import { NetWork } from 'src/entities/network';
-import { createFolder, deleteFile, fileExist } from 'src/utils/file-tool';
+} from '../../tools/tool';
+import { requestAxiosHeaders } from '../../config/request-headers';
+import { NetWork } from '../../entities/network';
+import { createFolder, deleteFile, fileExist } from '../../utils/file-tool';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { chromium } from 'playwright';
 
