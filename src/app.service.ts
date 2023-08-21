@@ -12,7 +12,7 @@ export class AppService {
     try {
       const baidu = new Baidu();
       baidu.start();
-      return '<b>Hello World!!!</b>';
+      return '<b>Hello My World!!!</b>';
     } catch (error) {
       throw error;
     }

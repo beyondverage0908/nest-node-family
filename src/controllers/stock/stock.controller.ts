@@ -2,10 +2,10 @@ import { Controller, Get, Query } from '@nestjs/common';
 import { HttpResult } from '../../../src';
 import { StockService } from '../../services/stock/stock.service';
 
-@Controller('/nest/api/stock')
+@Controller('nest/api')
 export class StockController {
   constructor(private readonly stockService: StockService) {}
-  @Get('today')
+  @Get('/stock/today')
   async getDayTurnover(): Promise<HttpResult<any>> {
     const result = await this.stockService.getDayTurnover();
     return {
@@ -15,7 +15,7 @@ export class StockController {
       data: result ?? [],
     };
   }
-  @Get('lastday')
+  @Get('/stock/lastday')
   async getLastDayTrunover(): Promise<HttpResult<any>> {
     const result = await this.stockService.getLastDayTurnover();
     return {
@@ -25,7 +25,7 @@ export class StockController {
       data: result ?? [],
     };
   }
-  @Get('stockvalue')
+  @Get('/stock/stockvalue')
   async getStockValue(
     @Query('securityCode') securityCode: string,
   ): Promise<HttpResult<any>> {

@@ -1,3 +1,3 @@
 export default {
-  port: 10010,
+  port: 3001,
 };
