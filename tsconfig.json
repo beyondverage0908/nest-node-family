@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": false
   },
   "files": ["src/index.d.ts"],
-  "include": ["src"]
+  "include": ["src", "ecosystem.config.js"]
 }

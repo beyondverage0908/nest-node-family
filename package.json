@@ -78,5 +78,11 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "playwright": {
+    "browsers": [
+      "chromium"
+    ],
+    "use": "mirror"
   }
 }
