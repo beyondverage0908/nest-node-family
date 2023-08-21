@@ -20,8 +20,8 @@ export class BillService {
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.setViewportSize({
-      width: 375,
-      height: 667,
+      width: 441,
+      height: 896,
     });
     // 确定目录是否存在
     const dir = path.resolve(process.cwd(), 'static/tickets');
@@ -41,9 +41,10 @@ export class BillService {
           dayjs(date).format('YYYY-MM-DD') + '.jpeg',
         )}`,
         fullPage: true,
-        type: 'png',
+        type: 'jpeg',
+        quality: 100,
+        scale: 'css',
       });
-      await page.waitForTimeout(10);
     }
     await page.close();
     await context.close();
