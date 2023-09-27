@@ -19,25 +19,25 @@ export const TICKET_WECHAT_URL =
 
 // 生成一个大于35，小于44的金额
 function getMoney() {
-  return 35 + (Date.now() % 10);
+  return 35 + (Date.now() % 5);
 }
 
 const shopNames = [
-  '郑晚霞蒸菜馆',
-  '福达快餐店',
-  '缘位快餐店',
-  '宛水悦轩快餐店',
-  '跳跳鱼',
-  '一品鲜',
-  '沫沫店铺',
+  '蒸菜馆',
+  '芝根芝底披萨',
+  '小碗蒸菜',
+  '小菜园新徽菜',
+  '东北饺子馆',
+  '湘菜馆 私房菜',
+  '金陵后厨',
 ];
 const shopAddresses = [
-  '南京市雨花客厅13号',
-  '南京市雨花客厅19号',
-  '南京市雨花客厅23号',
-  '南京市雨花客厅45号',
-  '南京市雨花客厅67号',
-  '南京市雨花客厅58号',
+  '雨花客厅店13号',
+  '雨花客厅店19号',
+  '雨花客厅店23号',
+  '雨花客厅店45号',
+  '雨花客厅店67号',
+  '雨花客厅店58号',
 ];
 
 /**
@@ -72,7 +72,7 @@ function getRandomArbitrary(min: number, max: number) {
 }
 // 获取指定的时间
 export function formatDate(dateString: string): string {
-  const hour = getRandomArbitrary(18, 21);
+  const hour = getRandomArbitrary(18, 20);
   const minute = getRandomArbitrary(0, 59);
   const second = getRandomArbitrary(0, 59);
   return `${dateTool.format(dateString)} ${hour}:${
