@@ -6,11 +6,7 @@ import * as https from 'https';
 import * as ExcelJS from 'exceljs';
 import * as path from 'path';
 import { CheerioTool } from '../../tools/cheerio-tool';
-import {
-  getOriginFromUrl,
-  getTopDomainFromUrl,
-  removeAllSpace,
-} from '../../tools/tool';
+import { getOriginFromUrl, getTopDomainFromUrl, removeAllSpace } from '../../tools/tool';
 import { requestAxiosHeaders } from '../../config/request-headers';
 import { NetWork } from '../../entities/network';
 import { createFolder, deleteFile, fileExist } from '../../utils/file-tool';
@@ -39,9 +35,7 @@ export class LinkService {
     });
     // 判断获取页面的编码格式
     let decodeType = '';
-    const contentType =
-      httpResponse.headers['content-type'] ||
-      httpResponse.headers['Content-Type'];
+    const contentType = httpResponse.headers['content-type'] || httpResponse.headers['Content-Type'];
     const regex = /charset=([\w-]+)/i;
     const match = contentType.match(regex);
     if (match && match[1]) {
@@ -140,8 +134,7 @@ export class LinkService {
       await page.goto(`https://quote.eastmoney.com/${stock}.html`, {
         waitUntil: 'domcontentloaded',
       });
-      const selector =
-        '.quote_quotenums > .zxj > span:nth-child(1) > span:nth-child(1)';
+      const selector = '.quote_quotenums > .zxj > span:nth-child(1) > span:nth-child(1)';
       await page.waitForSelector(selector);
       const text = await page.$eval(selector, (span) => span.textContent);
       return text;

@@ -20,10 +20,7 @@ export class LinkController {
   async getExcelTest(@Query('num') num: number): Promise<HttpResult<number>> {
     const networks: NetWork[] = [];
     Array.from({ length: num }).forEach((val, index) => {
-      const net = new NetWork(
-        `第${index + 1}个`,
-        `https://www.baidu.com/${index + 1}`,
-      );
+      const net = new NetWork(`第${index + 1}个`, `https://www.baidu.com/${index + 1}`);
       net.message = '错误消息: ' + Date.now();
       networks.push(net);
     });
@@ -36,9 +33,7 @@ export class LinkController {
     };
   }
   @Get('/stock')
-  async getStockValue(
-    @Query('stock') stock: string,
-  ): Promise<HttpResult<string>> {
+  async getStockValue(@Query('stock') stock: string): Promise<HttpResult<string>> {
     const value = await this.linkService.fetchStockValue(stock);
     return {
       success: true,

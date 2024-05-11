@@ -26,9 +26,7 @@ export class StockController {
     };
   }
   @Get('/stock/stockvalue')
-  async getStockValue(
-    @Query('securityCode') securityCode: string,
-  ): Promise<HttpResult<any>> {
+  async getStockValue(@Query('securityCode') securityCode: string): Promise<HttpResult<any>> {
     if (!securityCode) {
       return {
         code: 201,

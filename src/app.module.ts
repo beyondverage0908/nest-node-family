@@ -11,11 +11,14 @@ import { StockController } from './controllers/stock/stock.controller';
 import { StockService } from './services/stock/stock.service';
 import { BillController } from './controllers/bill/bill.controller';
 import { BillService } from './services/bill/bill.service';
+import { ZnxgService } from './services/znxg/znxg.service';
+import { ZnxgController } from './controllers/znxg/znxg.controller';
 import WinstonDailyLogConfig from './config/daily-log';
+import { ZnxgUploadModule } from './modules/znxg-upload.module';
 
 @Module({
-  imports: [WinstonDailyLogConfig],
-  controllers: [AppController, LinkController, StockController, BillController],
+  imports: [WinstonDailyLogConfig, ZnxgUploadModule],
+  controllers: [AppController, LinkController, StockController, BillController, ZnxgController],
   providers: [
     AppService,
     { provide: APP_FILTER, useClass: HttpExceptionFilter },
@@ -23,6 +26,7 @@ import WinstonDailyLogConfig from './config/daily-log';
     LinkService,
     StockService,
     BillService,
+    ZnxgService,
   ],
 })
 export class AppModule implements NestModule {
