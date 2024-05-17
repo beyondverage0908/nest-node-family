@@ -8,6 +8,9 @@ import * as multer from 'multer';
 @Module({
   imports: [
     MulterModule.register({
+      limits: {
+        fileSize: Infinity,
+      },
       // JSON 文件上传的特定配置
       // dest: './static/znxg',
       storage: multer.diskStorage({
