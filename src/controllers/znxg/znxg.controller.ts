@@ -27,25 +27,36 @@ export class ZnxgController {
 
   @Get('json')
   async getZnxgJson(): Promise<HttpResult<any>> {
-    const data01Path = path.join(process.cwd(), `./static/znxg/data01.json`);
-    const data02Path = path.join(process.cwd(), `./static/znxg/data02.json`);
-    let data01 = null;
-    if (fs.existsSync(data01Path)) {
-      data01 = fs.readFileSync(data01Path, { encoding: 'utf-8' });
+    try {
+      const dir = path.join(process.cwd(), `./static/znxg`);
+      const files = fs.readdirSync(dir);
+      // 过滤出json文件
+      const jsonFiles = files.filter((file) => path.extname(file) === '.json');
+
+      // 并行读取所有json文件的内容
+      const fileContents = await Promise.all(
+        jsonFiles.map((file) => {
+          const content = fs.readFileSync(path.join(dir, file), { encoding: 'utf-8' });
+          return JSON.parse(content);
+        }),
+      );
+
+      // 构建以文件名为 key，内容为 value 的对象
+      const result = jsonFiles.reduce((acc, file, index) => {
+        const fileNameWithoutExtension = path.basename(file, '.json');
+        acc[fileNameWithoutExtension] = fileContents[index];
+        return acc;
+      }, {});
+
+      return {
+        message: '成功',
+        data: result,
+        success: true,
+        code: HttpStatus.OK,
+      };
+    } catch (error) {
+      throw new HttpException('获取数据失败', HttpStatus.BAD_REQUEST);
     }
-    let data02 = null;
-    if (fs.existsSync(data02Path)) {
-      data02 = fs.readFileSync(data02Path, { encoding: 'utf-8' });
-    }
-    return {
-      message: '成功',
-      data: {
-        data01: JSON.parse(data01),
-        data02: JSON.parse(data02),
-      },
-      success: true,
-      code: HttpStatus.OK,
-    };
   }
   @Post('/upload/json')
   @UseInterceptors(
