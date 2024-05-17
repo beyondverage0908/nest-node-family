@@ -33,7 +33,7 @@ export class ZnxgController {
       data01 = fs.readFileSync(data01Path, { encoding: 'utf-8' });
     }
     let data02 = null;
-    if (data02) {
+    if (fs.existsSync(data02Path)) {
       data02 = fs.readFileSync(data02Path, { encoding: 'utf-8' });
     }
     return {
