@@ -15,10 +15,11 @@ import { ZnxgService } from './services/znxg/znxg.service';
 import { ZnxgController } from './controllers/znxg/znxg.controller';
 import WinstonDailyLogConfig from './config/daily-log';
 import { ZnxgUploadModule } from './modules/znxg-upload.module';
+import { DongdongController } from './dongdong/dongdong.controller';
 
 @Module({
   imports: [WinstonDailyLogConfig, ZnxgUploadModule],
-  controllers: [AppController, LinkController, StockController, BillController, ZnxgController],
+  controllers: [AppController, LinkController, StockController, BillController, ZnxgController, DongdongController],
   providers: [
     AppService,
     { provide: APP_FILTER, useClass: HttpExceptionFilter },
